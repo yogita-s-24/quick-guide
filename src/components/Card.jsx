@@ -2,10 +2,23 @@ import React from "react";
 import { FaRegFileAlt } from "react-icons/fa";
 import { LuDownload } from "react-icons/lu";
 import { IoClose } from "react-icons/io5";
+import { motion } from "framer-motion";
 
-function Card({ data }) {
+function Card({ data, reference }) {
   return (
-    <div className="relative w-60 h-72 rounded-[50px] bg-zinc-900/90 text-white px-8 py-10 overflow-hidden">
+    <motion.div
+      //   drag
+      //   drageConstraints={reference}
+      //   whileDrag={{ scale: 1.1 }}
+      //   dragElastic={0.1}
+      //   dragTransition={{ bounceStiffness: 600, bounceDamping: 100 }}
+      drag
+      dragConstraints={reference}
+      whileDrag={{ scale: 1.1 }}
+      dragElastic={0.1}
+      dragTransition={{ bounceStiffness: 100, bounceDamping: 30 }}
+      
+      className="relative flex shrink-0 w-60 h-72 rounded-[10px] bg-zinc-900/90 text-white px-8 py-10 overflow-hidden">
       <FaRegFileAlt />
       <p className="text-sm mt-5 leading-tight font-semibold">{data.name}</p>
       <div className="footer absolute bottom-0 left-0 w-full">
@@ -21,12 +34,15 @@ function Card({ data }) {
         </div>
 
         {data.tag.isOpen ? (
-          <div className="tag w-full py-3 bg-red-600 flex items-center justify-center">
-            <h3 className="text-sm font-semibold">Download Now</h3>
+          <div
+            className={`tag w-full py-3 ${
+              data.tag.tagColor === "blue" ? "bg-red-600" : "bg-blue-700"
+            } flex items-center justify-center`}>
+            <h3 className="text-sm font-semibold">{data.tag.tagTitle}</h3>
           </div>
         ) : null}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

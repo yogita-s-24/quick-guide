@@ -1,10 +1,14 @@
 import './App.css'
+import Background from './components/Background'
+import Foreground from './components/Foreground'
+
 function App() {
 
   return (
-    <>
-      <h1>App</h1>
-    </>
+    <div className='relative w-full h-screen bg-zinc-300'>
+      <Background/>
+      <Foreground/>
+      </div>
   )
 }
 
